@@ -1,27 +1,22 @@
+import http
+
+import jwt
 from django.db import models
 from django.http import HttpResponse
 from rest_framework import generics, permissions
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.permissions import IsAdminUser
+from rest_framework.exceptions import AuthenticationFailed
+from rest_framework.permissions import IsAdminUser, AllowAny
 from rest_framework.views import APIView
-
-# from .models import Movie, Actor, Review
-# from .serializers import (
-#     MovieListSerializer,
-#     MovieDetailSerializer,
-#     ReviewCreateSerializer,
-#     CreateRatingSerializer,
-#     ActorListSerializer,
-#     ActorDetailSerializer,
-# )
-# from .service import get_client_ip, MovieFilter
+from corsheaders import signals, middleware
 
 
 class FirstView(APIView):
     permission_classes = [IsAdminUser]
-    filter_backends = (DjangoFilterBackend,)
+    # filter_backends = (DjangoFilterBackend,)
 
     def get(self, request):
+        # token = token_serializer_class(token).data
         return HttpResponse('123')
 
 # class MovieListView(generics.ListAPIView):
