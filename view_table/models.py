@@ -1,5 +1,6 @@
 from django.db import models
 
+from django.contrib.auth.models import User
 
 class Authors(models.Model):
     """Model of Authors"""
@@ -27,3 +28,16 @@ class Books(models.Model):
     class Meta:
         verbose_name = 'Book'
         verbose_name_plural = 'Books'
+
+
+class MyToken(models.Model):
+    user = models.OneToOneField(User, on_delete=models.PROTECT)
+    mytoken = models.CharField('Token', max_length=40)
+
+    def __str__(self):
+        return f'{self.user} {self.mytoken}'
+
+    class Meta:
+        verbose_name = 'MyToken'
+        verbose_name_plural = 'MyTokens'
+

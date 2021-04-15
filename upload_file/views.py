@@ -11,7 +11,7 @@ import csv
 #
 #
 # @login_required
-def download_file(request):
+def upload_file(request):
     form = CsvForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.save()  # after completing the addition - go to the galvanized page
@@ -46,4 +46,4 @@ def download_file(request):
     context = {
         'form': form,
     }
-    return render(request, 'download_file.html', context)
+    return render(request, 'upload_file.html', context)

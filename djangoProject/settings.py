@@ -45,8 +45,10 @@ INSTALLED_APPS = [
     # 'django_filters',
     'corsheaders',
 
-    'download_file',
+    'upload_file',
     'view_table',
+    'djangoProject',
+    'autheticate',
 
 ]
 
