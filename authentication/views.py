@@ -50,11 +50,7 @@ def login(request):
         try:
             token = request.COOKIES['Auth_token']
             if MyToken.objects.filter(mytoken=token).exists():
-                message = 'You are already login'
-                context = {
-                    'message': message,
-                }
-                return render(request, 'login.html', context)
+                return redirect('/')
         except:
             form = LoginForm()
             context = {
