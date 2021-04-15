@@ -39,16 +39,33 @@ def login(request):
                     token,
                 )
                 return response
-        else:
+            else:
+                form = LoginForm()
+                context = {
+                    'form': form,
+                    'invalid_data': 'Invalid name or password',
+                }
+                return render(request, 'login.html', context)
+    else:
+        try:
+            token = request.COOKIES['Auth_token']
+            if MyToken.objects.filter(mytoken=token).exists():
+                message = 'You are already login'
+                context = {
+                    'message': message,
+                }
+                return render(request, 'login.html', context)
+        except:
             form = LoginForm()
             context = {
                 'form': form,
-                'invalid_data': 'Invalid name or password',
             }
             return render(request, 'login.html', context)
-    else:
-        form = LoginForm()
-    context = {
-        'form': form,
-    }
-    return render(request, 'login.html', context)
+
+
+def logout(request):
+    response = redirect('/')
+    token = request.COOKIES['Auth_token']
+    MyToken.objects.filter(mytoken=token).delete()
+    response.delete_cookie('Auth_token')
+    return response

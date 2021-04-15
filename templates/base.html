@@ -10,14 +10,12 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-{#    {% if request.user.is_authenticated and request.user.is_staff %}#}
         <header class="header">
             <a class="company_name">DALVTALUB</a>
             <nav class="nav_block">
                 <a class="navigation" href="/upload_file/">UPLOAD FILE</a>
                 <a class="navigation" href="/">SHOW TABLE</a>
-                <a class="navigation" href="login/">LOGIN</a>
-                <a class="navigation" href="login/">LOGOUT</a>
+                <a class="navigation" href="logout/">LOGOUT</a>
             </nav>
         </header>
         <div class="container">
@@ -26,8 +24,5 @@
         <footer class='footer'>
             <h2 class='footer'>© 2021 Done in one evening. Vlad Bulat</h2>
         </footer>
-{#    {% else %}#}
-{#        <h2>403 Forbidden</h2>#}
-{#    {% endif %}#}
 </body>
 </html>
