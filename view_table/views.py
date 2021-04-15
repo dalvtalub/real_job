@@ -16,11 +16,11 @@ def view_table(request):
         if form.cleaned_data['author']:
             books = books.filter(author__name_and_surname__contains=form.cleaned_data['author'])
         if form.cleaned_data['year_of_book']:
-            books = books.filter(year_of_writing=form.cleaned_data['year_of_book'])
+            books = books.filter(year_of_writing__contains=form.cleaned_data['year_of_book'])
         if form.cleaned_data['name_of_book']:
             books = books.filter(name__contains=form.cleaned_data['name_of_book'])
         if form.cleaned_data['birth_year']:
-            books = books.filter(author__date_of_birth=form.cleaned_data['birth_year'])
+            books = books.filter(author__date_of_birth__contains=form.cleaned_data['birth_year'])
     context = {
         'form': form,
         'authors': authors,
