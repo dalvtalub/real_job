@@ -1,21 +1,14 @@
-from django.http import HttpResponse
-
 import jwt
 
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.contrib.auth.models import User
 
+
 from .forms import LoginForm
 from .models import MyToken
 
 import datetime as dt
-
-
-def set_cookies_function(request, token):
-    response = HttpResponse('')
-    response.set_cookie("Auth_token", token,  365 * 24 * 60 * 60,)
-    return response
 
 
 def login(request):
@@ -35,14 +28,17 @@ def login(request):
                     new_token = MyToken.objects.get(user=user.id)
                     new_token.mytoken = token
                     new_token.save()
-                    set_cookies_function(request, new_token)
                 else:
                     MyToken.objects.create(
                         user=User.objects.get(username=name),
                         mytoken=token,
                     )
-                    set_cookies_function(request, token)
-                return redirect('/')
+                response = redirect('/')
+                response.set_cookie(
+                    "Auth_token",
+                    token,
+                )
+                return response
         else:
             form = LoginForm()
             context = {
