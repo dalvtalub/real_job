@@ -6,7 +6,7 @@ from authentication.models import MyToken
 class CheckTokenMiddleware(MiddlewareMixin):
 
     def process_request(self, request):
-        if request.path != '/login/' and request.path != '/admin/':
+        if request.path == '/' or request.path == '/upload_file/':
             try:
                 token = request.COOKIES['Auth_token']
                 if MyToken.objects.filter(mytoken=token).exists():
