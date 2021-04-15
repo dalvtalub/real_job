@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from view_table.views import view_table
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -12,5 +12,7 @@ urlpatterns = [
 
     path('', include('view_table.urls')),
     path('upload_file/', include('upload_file.urls')),
+    path('login/', include('authentication.urls')),
+
 ]
 

@@ -44,11 +44,11 @@ INSTALLED_APPS = [
     'djoser',
     # 'django_filters',
     'corsheaders',
-
+    'crispy_forms',
     'upload_file',
     'view_table',
     'djangoProject',
-    'autheticate',
+    'authentication',
 
 ]
 
@@ -61,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'authentication.auth_middleware',
 ]
 
 ROOT_URLCONF = 'djangoProject.urls'
@@ -68,7 +69,7 @@ ROOT_URLCONF = 'djangoProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
+        'DIRS': [os.path.join(BASE_DIR, 'templates')]
         ,
         'APP_DIRS': True,
         'OPTIONS': {

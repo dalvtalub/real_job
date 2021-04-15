@@ -13,6 +13,8 @@ import csv
 # @login_required
 def upload_file(request):
     form = CsvForm(request.POST or None, request.FILES or None)
+    session = request.session
+    # print(session.get())
     if form.is_valid():
         form.save()  # after completing the addition - go to the galvanized page
         form = CsvForm()
