@@ -3,10 +3,11 @@
     Download File
 {% endblock %}
 {% block content %}
-    <h2>UPLOAD FILE</h2>
+    <h2>UPLOAD FILE</h2> <br>
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.file_name}}
-        <button type="submit">Confirm</button>
-    </form>
+        <button type="submit">Upload</button>
+    </form><br>
+    <h4>{{ information }}</h4>
 {% endblock %}
