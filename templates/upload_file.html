@@ -3,7 +3,7 @@
     Download File
 {% endblock %}
 {% block content %}
-    <h2>UPLOAD</h2>
+    <h2>UPLOAD FILE</h2>
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.file_name}}

@@ -38,6 +38,11 @@ body {
     transition: opacity 0.1s;
 }
 
+.logout{
+    font-weight: bolder;
+    color: #d9094d;
+}
+
 .navigation:hover {
     opacity: 0.5;
 }
