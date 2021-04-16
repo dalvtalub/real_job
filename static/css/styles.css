@@ -139,3 +139,54 @@ th.sorted[data-order="1"]::after {
     font-weight: bold;
     text-align: center;
 }
+
+/*  -----------------------  login.html  ----------------------- */
+
+.login_template{
+    background-color: #a49d95;
+}
+
+.border{
+    display: inline-block;
+    height: 200px;
+    width: 500px;
+    background-color: blanchedalmond;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    border-radius: 15px;
+}
+
+.login_form{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+.login_btn {
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    height: 25px;
+    width: 80px;
+    font-size: large;
+    background-color: #30b78c;
+    border-color: #30b78c;
+    border-radius: 10px;
+    transition: opacity 0.1s;
+    margin-top: 10px;
+}
+
+.text{
+    text-align: center;
+}
+
+.name{
+    padding-bottom: 10px;
+}
+
+
