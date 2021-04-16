@@ -12,7 +12,7 @@ class CheckTokenMiddleware(MiddlewareMixin):
                 if MyToken.objects.filter(mytoken=token).exists():
                     pass
                 else:
-                    response = redirect('login/')
+                    response = redirect('/login/')
                     return response
             except:
-                return redirect('login/')
+                return redirect('/login/')
