@@ -100,7 +100,12 @@ body {
     margin: auto;
 }
 
-.table_sort th {
+.text_without_cursor {
+    color: #ffebcd;
+    background: #008b8b;
+}
+
+.text_with_cursor {
     color: #ffebcd;
     background: #008b8b;
     cursor: pointer;
