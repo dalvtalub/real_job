@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'view_table',
     'djangoProject',
     'authentication',
-
+    'assets',
 ]
 
 MIDDLEWARE = [
