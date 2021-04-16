@@ -5,7 +5,6 @@ from .forms import LibraryFilter
 
 def view_table(request):
     books = Books.objects.all()
-    authors = Authors.objects.all()
     form = LibraryFilter(request.GET)
     if form.is_valid():
         if form.cleaned_data['author']:
@@ -16,9 +15,13 @@ def view_table(request):
             books = books.filter(name__contains=form.cleaned_data['name_of_book'])
         if form.cleaned_data['birth_year']:
             books = books.filter(author__date_of_birth__contains=form.cleaned_data['birth_year'])
+    sort = ''
+    if request.GET and "sort" in request.GET and request.GET['sort']:
+        sort = request.GET['sort']
+        books = books.order_by(sort)
     context = {
         'form': form,
-        'authors': authors,
         'books': books,
+        'sort': sort,
     }
     return render(request, 'view_table.html', context)

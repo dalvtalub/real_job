@@ -118,23 +118,12 @@ body {
     background: #e3e3e3;
 }
 
-th.sorted[data-order="1"],
-th.sorted[data-order="-1"] {
-    position: relative;
-}
-
-th.sorted[data-order="1"]::after,
-th.sorted[data-order="-1"]::after {
-    right: 8px;
-    position: absolute;
-}
-
-th.sorted[data-order="-1"]::after {
-	content: "▼"
-}
-
-th.sorted[data-order="1"]::after {
+.sort-up::after {
 	content: "▲"
+}
+
+.sort-down::after {
+	content: "▼"
 }
 .footer {
     height: 70px;

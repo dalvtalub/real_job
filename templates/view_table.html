@@ -3,101 +3,72 @@
     View Table
 {% endblock %}
 {% block script %}
+{#<script>#}
+{#document.addEventListener('DOMContentLoaded', () => {#}
+{##}
+{#    const getSort = ({ target }) => {#}
+{#        const order = (target.dataset.order = -(target.dataset.order || -1));#}
+{#        const index = [...target.parentNode.cells].indexOf(target);#}
+{#        const collator = new Intl.Collator(['en', 'ru'], { numeric: true });#}
+{#        const comparator = (index, order) => (a, b) => order * collator.compare(#}
+{#            a.children[index].innerHTML,#}
+{#            b.children[index].innerHTML#}
+{#        );#}
+{##}
+{#        for(const tBody of target.closest('table').tBodies)#}
+{#            tBody.append(...[...tBody.rows].sort(comparator(index, order)));#}
+{##}
+{#        for(const cell of target.parentNode.cells)#}
+{#            cell.classList.toggle('sorted', cell === target);#}
+{#    };#}
+{##}
+{#    document.querySelectorAll('.table_sort thead').forEach(tableTH => tableTH.addEventListener('click', () => getSort(event)));#}
+{# });#}
+{#</script>#}
 <script>
-{#function sortTable(n) {#}
-{#  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;#}
-{#  table = document.getElementById("table");#}
-{#  switching = true;#}
-{#  // Set the sorting direction to ascending:#}
-{#  dir = "asc";#}
-{#  /* Make a loop that will continue until#}
-{#  no switching has been done: */#}
-{#  while (switching) {#}
-{#    // Start by saying: no switching is done:#}
-{#    switching = false;#}
-{#    rows = table.rows;#}
-{#    /* Loop through all table rows (except the#}
-{#    first, which contains table headers): */#}
-{#    for (i = 1; i < (rows.length - 1); i++) {#}
-{#      // Start by saying there should be no switching:#}
-{#      shouldSwitch = false;#}
-{#      /* Get the two elements you want to compare,#}
-{#      one from current row and one from the next: */#}
-{#      x = rows[i].getElementsByTagName("TD")[n];#}
-{#      y = rows[i + 1].getElementsByTagName("TD")[n];#}
-{#      /* Check if the two rows should switch place,#}
-{#      based on the direction, asc or desc: */#}
-{#      if (dir == "asc") {#}
-{#        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {#}
-{#          // If so, mark as a switch and break the loop:#}
-{#          shouldSwitch = true;#}
-{#          break;#}
-{#        }#}
-{#      } else if (dir == "desc") {#}
-{#        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {#}
-{#          // If so, mark as a switch and break the loop:#}
-{#          shouldSwitch = true;#}
-{#          break;#}
-{#        }#}
-{#      }#}
-{#    }#}
-{#    if (shouldSwitch) {#}
-{#      /* If a switch has been marked, make the switch#}
-{#      and mark that a switch has been done: */#}
-{#      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);#}
-{#      switching = true;#}
-{#      // Each time a switch is done, increase this count by 1:#}
-{#      switchcount ++;#}
-{#    } else {#}
-{#      /* If no switching has been done AND the direction is "asc",#}
-{#      set the direction to "desc" and run the while loop again. */#}
-{#      if (switchcount == 0 && dir == "asc") {#}
-{#        dir = "desc";#}
-{#        switching = true;#}
-{#      }#}
-{#    }#}
-{#  }#}
-{# }#}
-document.addEventListener('DOMContentLoaded', () => {
-
-    const getSort = ({ target }) => {
-        const order = (target.dataset.order = -(target.dataset.order || -1));
-        const index = [...target.parentNode.cells].indexOf(target);
-        const collator = new Intl.Collator(['en', 'ru'], { numeric: true });
-        const comparator = (index, order) => (a, b) => order * collator.compare(
-            a.children[index].innerHTML,
-            b.children[index].innerHTML
-        );
-
-        for(const tBody of target.closest('table').tBodies)
-            tBody.append(...[...tBody.rows].sort(comparator(index, order)));
-
-        for(const cell of target.parentNode.cells)
-            cell.classList.toggle('sorted', cell === target);
-    };
-
-    document.querySelectorAll('.table_sort thead').forEach(tableTH => tableTH.addEventListener('click', () => getSort(event)));
-
-});
+function submit_sort(sort) {
+    document.getElementById('filter_books__sort').value = sort;
+    document.filter_books.submit();
+}
 </script>
+
 {% endblock %}
 {% block content %}
-   <form method="get">
+   <form method="get" name="filter_books">
         <h6 class="table">Author</h6>{{ form.author }}
         <h6 class="table">Birth of author</h6>{{ form.birth_year }}
         <h6 class="table">Year of book</h6>{{ form.year_of_book }}
         <h6 class="table">Book title</h6>{{form.name_of_book }}
-        <input type="submit" value="sort" class="submit">
+        <input type="hidden" name="sort" id="filter_books__sort">
+        <input type="submit" value="submit" class="submit">
    </form>
     <div>
-    {% if books and authors %}
-    <table class="table_sort" border="1" id="table_sort">
+    {% if books %}
+    <table class="table_sort" id="table_sort">
         <thead>
             <tr>
-                <th onclick="sortTable(0)">Author</th>
-                <th onclick="sortTable(1)">Birth of author</th>
-                <th onclick="sortTable(2)">Year of book</th>
-                <th onclick="sortTable(3)">Book title</th>
+                <th>Author</th>
+                {% if sort == 'author__date_of_birth' %}
+                    <th><div class="sort-up" onclick="submit_sort('-author__date_of_birth')">Birth of author</div></th>
+{#                    <th><a class="sort-up" href="?sort=-author__date_of_birth">Birth of author</a></th>#}
+                {% elif sort == '-author__date_of_birth' %}
+                    <th><div class="sort-down" onclick="submit_sort('author__date_of_birth')">Birth of author</div></th>
+{#                    <th><a class="sort-down" href="?sort=author__date_of_birth">Birth of author</a></th>#}
+                {% else %}
+                    <th><div onclick="submit_sort('author__date_of_birth')">Birth of author</div></th>
+{#                    <th><a href="?sort=author__date_of_birth">Birth of author</a></th>#}
+                {% endif %}
+                {% if sort == 'year_of_writing' %}
+                    <th><div class="sort-up" onclick="submit_sort('-year_of_writing')">Year of book</div></th>
+{#                    <th><a class="sort-up" href="?sort=-year_of_writing">Year of book</a></th>#}
+                {% elif sort == '-year_of_writing' %}
+                    <th><div class="sort-down"  onclick="submit_sort('year_of_writing')">Year of book</div></th>
+{#                    <th><a class="sort-down" href="?sort=year_of_writing">Year of book</a></th>#}
+                {% else %}
+                    <th><div onclick="submit_sort('year_of_writing')">Year of book</div></th>
+{#                    <th><a href="?sort=year_of_writing">Year of book</a></th>#}
+                {% endif %}
+                <th>Book title</th>
             </tr>
         </thead>
         {% for book in books %}
