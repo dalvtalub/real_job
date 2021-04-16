@@ -9,16 +9,20 @@
     <link rel="stylesheet" href="../static/css/styles.css">
     <title>Login</title>
 </head>
-<body>
-    <h4 class="card-title">Log in to your account</h4>
-    <form method="post">
-        {% csrf_token %}
-        <h4>Name</h4>
-        {{ form.name }}
-        <h4>Password</h4>
-        {{ form.password }}<br>
-        <button type="submit" class="btn btn-primary btn-block">Log in</button>
-    </form>
-    {{ invalid_data }}
+<body class="login_template">
+    <div class="border">
+        <div class="login_form">
+            <h2 class="text name">Log in to your account</h2>
+            <form method="post">
+                {% csrf_token %}
+                <h2 class="text">Name</h2>
+                <div class="text"> {{ form.name }}
+                <h2 class="text">Password</h2>
+                <div class="text"> {{ form.password }} </div>
+                <button type="submit" class="login_btn">Log in</button>
+            </form>
+            {{ invalid_data }}
+        </div>
+    </div>
 </body>
 </html>

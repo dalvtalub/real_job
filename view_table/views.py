@@ -1,11 +1,6 @@
 from django.shortcuts import render
-
-from authentication.models import MyToken
 from .models import *
 from .forms import LibraryFilter
-from django.contrib.auth.views import LoginView
-from django.urls import reverse_lazy
-# from view_table.forms import AuthForm
 
 
 def view_table(request):
